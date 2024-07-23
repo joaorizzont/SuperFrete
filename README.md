@@ -53,7 +53,7 @@ Para o desenvolvimento desse projeto, utilizei alguns conceitos de 2 arquitetura
 **Exemplo de Requisição**:
 
 ```bash
-curl -X POST http://localhost:5001/YOUR_PROJECT_ID/us-central1/createUser \
+curl -X POST http://localhost:5001/superfrete/us-central1/createUser \
 -H "Content-Type: application/json" \
 -d '{"name": "John Doe"}'
 ```
@@ -81,14 +81,20 @@ curl -X POST http://localhost:5001/YOUR_PROJECT_ID/us-central1/createUser \
 **Exemplo de Requisição**:
 
 ```bash
-curl -X GET http://localhost:5001/YOUR_PROJECT_ID/us-central1/getUser/1
+curl -X GET http://localhost:5001/superfrete/us-central1/getUser/1
 ```
 
 ## Configuração
 
 Para configurar o ambiente de desenvolvimento:
 
-1. Instale as Dependências:
+1. Acesse o diretorio functions
+
+```bash
+  cd functions
+```
+
+2. Instale as Dependências:
 
 ```bash
   npm install
@@ -105,9 +111,9 @@ Para executar a API localmente usando emuladores do Firebase:
   ```
 2. Acesse a API:
 
-A API estará disponível em http://localhost:5001/YOUR_PROJECT_ID/us-central1/.
+A API estará disponível em http://localhost:5001/superfrete/us-central1/.
 
-## Testes automatizados
+## Testes
 
 Para rodar os testes unitários:
 
