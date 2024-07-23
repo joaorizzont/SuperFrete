@@ -1,5 +1,5 @@
 const admin = require('firebase-admin');
-const { createUser, getUser } = require('../index.js');
+const { createUser, getUser } = require('../../index.js');
 
 jest.mock('firebase-admin', () => {
   const mAdmin = {
