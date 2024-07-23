@@ -1,31 +1,35 @@
 const admin = require('firebase-admin');
-const { Firestore } = require("firebase-admin/firestore");
+const { FieldValue } = require("firebase-admin/firestore");
 
 const db = admin.firestore();
 
 class User {
   constructor(data) {
     this.name = data.name || null;
-    this.createdAt = Firestore.FieldValue.serverTimestamp()
+    this.createdAt = FieldValue.serverTimestamp()
   }
 
   async save() {
-    const docRef = await db.collection('users').add({
+    const res = await db.collection('users').add({
       name: this.name,
       createdAt: this.createdAt
     });
-    this.id = docRef.id;
-    return this;
+    this.id = res.id;
+    return true;
   }
 
-  static async findById(id) {
-    const docRef = db.collection('users').doc(id);
-    const doc = await docRef.get();
-    if (!doc.exists) {
+  static async findByIncrementId(incrementId) {
+    const usersRef = db.collection('users');
+    const querySnapshot = await usersRef.where('increment_id', '==', Number(incrementId)).get();
+
+    if (querySnapshot.empty) {
       return null;
     }
-    return { id: doc.id, ...doc.data() };
+
+    const doc = querySnapshot.docs[0];
+    return { ...doc.data() };
   }
+
 }
 
 module.exports = User;

@@ -2,8 +2,8 @@ const userService = require('./user.service');
 
 exports.createUser = async (data) => {
   try {
-    const user = await userService.createUser(data);
-    return user;
+    const userCreated = await userService.createUser(data);
+    return userCreated;
   } catch (error) {
     throw new Error(error.message);
   }
