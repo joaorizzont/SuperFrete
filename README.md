@@ -4,12 +4,33 @@ Esta é uma API para gerenciar usuários utilizando o Firebase Firestore. Os end
 
 ## Índice
 
+- [Arquitetura](#arquitetura)
 - [Endpoints](#endpoints)
   - [Criar Usuário](#criar-usuário)
   - [Buscar Usuário](#buscar-usuário)
 - [Configuração](#configuração)
 - [Execução Local](#execução-local)
 - [Testes](#testes)
+- [Considerações](#considerações)
+
+## Arquitetura
+
+Para o desenvolvimento desse projeto, utilizei alguns conceitos de 2 arquiteturas, visto que a ideia era um projeto que fosse escalavel.
+
+  1. Microserviços
+
+    Cada Modulo de usuario pode ser considerada um microserviço que realiza uma função específica, 
+    como criar um usuário ou buscar um usuário. Isso promove a modularidade e facilita a manutenção e o escalonamento do sistema.
+
+    por mais que estejam todas "separadas" no index.js, caso fossemos aumentar o sistema, poderiamos agrupar essas funções por modulo e 
+    cada modulo seria um microserviço com funções independentes.
+
+  2. Arquitetura em Camadas (MVC)
+   
+    Camada de Controle (Controller), Camada de Serviço (Service) e Camada de Persistência (Model)
+
+    A escolha desse tipo de arquitetura, foi para conseguirmos definir bem as responsavbilidades e deixar o projeto mais modular.
+    Facilitando na manutenção
 
 ## Endpoints
 
@@ -96,3 +117,20 @@ Para rodar os testes unitários:
 
 Os testes estão localizados no diretório functions/test e utilizam jest para garantir que a API funciona conforme esperado.
 
+
+## Considerações
+
+1. Visto que foi sugerido a não utilização de frameworks, nao utilizei o express. Em um projeto de larga escala e em produção,
+   é fortemente recomendado a utilização do mesmo.
+  
+  alguns pontos de porque utilizar express:
+
+```bash
+  1. Modularidade: Melhor suporte para organização de código em módulos e rotas.
+  2. Escalabilidade: Facilita a escalabilidade e manutenção à medida que o projeto cresce.
+  3. Reutilização de Código: Permite a reutilização de middleware e outros componentes, o que pode reduzir a duplicação de código.
+  4. Flexibilidade: Maior flexibilidade para implementar lógica de roteamento complexa.
+```
+
+2. Não apliquei o conceito de injeção de dependencia por ser um projeto de curta duração e apenas para identificar como codifico e como trato a arquitetura.
+   Porem, como ponto de melhoria, caso fosse um projeto que fosse ser escalado e continuado, modificaria para implementarmos as injeções de dependencia.
